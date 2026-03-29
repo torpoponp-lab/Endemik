@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Животный мир Байкала</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff6f91, #6fa3ef, #5c94d9);
+      color: #111;
+    }
+    .app {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 24px 20px 18px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+    }
+    .title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #e91e63;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .lake-shape {
+      width: 110px;
+      height: 180px;
+      margin: 0 auto 16px;
+      border-radius: 60% 40% 65% 35% / 35% 65% 35% 65%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, transparent 55%),
+                  radial-gradient(circle at 70% 80%, #b3e5fc 0, transparent 55%),
+                  linear-gradient(160deg, #4fc3f7, #0d47a1);
+      box-shadow: 0 8px 25px rgba(13, 71, 161, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .lake-shape::after {
+      content: "";
+      position: absolute;
+      inset: 12% 18%;
+      border-radius: inherit;
+      border: 2px dashed rgba(255,255,255,0.3);
+      opacity: 0.6;
+    }
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      background: #f5f5f5;
+      padding: 4px;
+      border-radius: 999px;
+    }
+    .tab {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      background: transparent;
+      color: #555;
+      transition: all 0.15s ease-out;
+      white-space: nowrap;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.5);
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      transition: transform 0.12s ease-out;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ff6f91;
+      box-shadow: 0 0 6px rgba(255, 105, 180, 0.8);
+    }
+    .name {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .alias {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .desc {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      font-size: 12px;
+      color: #e91e63;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .footer {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: #777;
+    }
+    @media (max-width: 480px) {
+      .app { margin: 12px; padding: 18px 14px 14px; }
+      .lake-shape { margin-bottom: 12px; }
+      .title { font-size: 20px; }
+      .tabs { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1 class="title">Животный мир Байкала</h1>
+    <p class="subtitle">уникальные мамки эндемики</p>
+
+    <div class="lake-shape" aria-hidden="true"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-mamka="ilyaz">Мамка дырявая шлюха</button>
+      <button class="tab" data-mamka="kondrat">Мамка Юля</button>
+      <button class="tab" data-mamka="vitya">Мамка Наташа</button>
+    </div>
+
+    <div class="card" id="mamka-card">
+      <div class="badge">
+        <span class="dot"></span>
+        <span id="mamka-type">Мамка дырявая шлюха</span>
+      </div>
+      <div class="name" id="mamka-title">Мамка Ильяза</div>
+      <div class="alias" id="mamka-alias">особо опасный вид</div>
+      <p class="desc" id="mamka-desc">
+        Воспитывает потенциальную угрозу для людей и сама живёт в толпе, как гиены.
+      </p>
+      <div class="tagline" id="mamka-tagline">опасный байкальский эндемик</div>
+    </div>
+
+    <div class="footer">
+      Сделано с любовью, специально для своих.
+    </div>
+  </div>
+
+  <script>
+    const mamki = {
+      ilyaz: {
+        type: "Мамка дырявая шлюха",
+        title: "Мамка Ильяза",
+        alias: "особо опасный вид",
+        desc: "Воспитывает потенциальную угрозу для людей и сама живёт в толпе, как гиены.",
+        tagline: "опасный байкальский эндемик"
+      },
+      kondrat: {
+        type: "Мамка Юля",
+        title: "Мамка Кондрата",
+        alias: "опасная сучка",
+        desc: "Любит долбить подводные камни своей головой, странное существо, живёт в опасных для человека местах, но я люблю эту сучку.",
+        tagline: "удар головой — способ общения"
+      },
+      vitya: {
+        type: "Мамка Наташа",
+        title: "Мамка Вити",
+        alias: "лютая бейби",
+        desc: "Любит погружаться на дно и резко всплывать, чтобы давление давало ей новую дозу дофамина. Любит воспитывать бездомных мульти-гейских существ.",
+        tagline: "глубинная дофаминовая хищница"
+      }
+    };
+
+    const tabs = document.querySelectorAll(".tab");
+    const typeEl = document.getElementById("mamka-type");
+    const titleEl = document.getElementById("mamka-title");
+    const aliasEl = document.getElementById("mamka-alias");
+    const descEl = document.getElementById("mamka-desc");
+    const taglineEl = document.getElementById("mamka-tagline");
+    const cardEl = document.getElementById("mamka-card");
+
+    function setMamka(key) {
+      const data = mamki[key];
+      if (!data) return;
+
+      typeEl.textContent = data.type;
+      titleEl.textContent = data.title;
+      aliasEl.textContent = data.alias;
+      descEl.textContent = data.desc;
+      taglineEl.textContent = data.tagline;
+
+      cardEl.style.transform = "scale(0.97)";
+      setTimeout(() => {
+        cardEl.style.transform = "scale(1)";
+      }, 80);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const key = tab.getAttribute("data-mamka");
+        setMamka(key);
+      });
+    });
+
+    // стартовое состояние
+    setMamka("ilyaz");
+  </script>
+</body>
+</html>
